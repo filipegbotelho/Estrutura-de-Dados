@@ -1,12 +1,12 @@
 /*Universidade de Brasilia
 Instituto de Ciencias Exatas
 Departamento de Ciencia da Computacao
-Estrutura de Dados – 1/2017
+Estrutura de Dados â€“ 1/2017
 Aluno(a): Filipe Goncalves Botelho
 Matricula: 16/0120276
 Turma: B
-Descricao: Jogo da Batalha Naval. O qual consiste em acertar partes de embarcações
-do adversário por coordenadas do eixo cartesiano. Aquele que tiver mais pontos ao
+Descricao: Jogo da Batalha Naval. O qual consiste em acertar partes de embarcaÃ§Ãµes
+do adversÃ¡rio por coordenadas do eixo cartesiano. Aquele que tiver mais pontos ao
 final do jogo, ganha. */
 #include <stdio.h>
 #include <string.h>
@@ -19,9 +19,7 @@ Gabarito(void){
     int i, j, x, y, w, z, tem;
     memset(gabarito[0], '~', 100);
     memset(gabarito[1], '~', 100);
-
     srand((unsigned)time(NULL));
-
     tem = 0;
     i = 0;
     while (i < 6){
@@ -43,9 +41,8 @@ Gabarito(void){
                 j++;
             }
         }
-        else{
+        else
             i--;
-        }
         i++;
     }
 }
@@ -60,9 +57,8 @@ Prejogo(char nome[][20]){
     printf("\t\t\t\t\t\t\t- 5 pontos por cada 'X' de embarcacao\n\n");
     printf("\t\t\t\t\t\t\t- Ganha quem fizer mais pontos\n\n");
     printf("\t\t\t\t\t\t\t- Digite um numero maior que 10 ou menor que 0 para SAIR do jogo\n\n\n\n");
-    for (i = 0; i < 50; i++){
+    for (i = 0; i < 50; i++)
         printf("*  ");
-    }
     printf("\n\n");
     printf("Nome Player 1:");
     scanf(" %[^\n]s", nome[0]);
@@ -71,34 +67,28 @@ Prejogo(char nome[][20]){
     printf("\n\nPressione ENTER para continuar");
     getchar();
     getchar();
-
     system("cls");
 }
 
 Layout(int pontuacao[],char nome[][20]){
     int i, j;
-
     printf("\t\t\t\t\t\t\t\t*BATALHA NAVAL*\n\n\n");
     printf("    ");
-    for (j = 0; j < 10; j++){
+    for (j = 0; j < 10; j++)
             printf("%i   ", j);
-    }
     printf("\t\t\t\t\t\t");
     printf("    ");
-    for (j = 0; j < 10; j++){
+    for (j = 0; j < 10; j++)
             printf("%i   ", j);
-    }
     printf("\n");
     for (i = 0; i < 10; i++){
         printf("%i   ", i);
-        for (j = 0; j < 10; j++){
+        for (j = 0; j < 10; j++)
             printf("%c   ", campo[0][i][j]);
-        }
         printf("\t\t\t\t\t\t");
         printf("%i   ", i);
-        for (j = 0; j < 10; j++){
+        for (j = 0; j < 10; j++)
             printf("%c   ", campo[1][i][j]);
-        }
         printf("\n");
     }
     printf("\n\n%s: %i pontos\t\t\t\t\t\t\t\t\t\t", nome[1], pontuacao[1]);
@@ -152,9 +142,7 @@ Verificar(int i,int tiro[], int pontuacao[]){
             printf("Perdeu a vez. Tiro repitido!");
         }
     }
-
 }
-
 int main(void){
     int continuar, i, tiro[2], pontuacao[2];
     char nome[2][20];
@@ -169,27 +157,21 @@ int main(void){
     while(continuar == 0){
         Layout(pontuacao, nome);
         Jogo(nome, i, tiro);
-        if (tiro[0] >= 10 || tiro[0] < 0 || tiro[1] >= 10 || tiro[1] < 0){
+        if (tiro[0] >= 10 || tiro[0] < 0 || tiro[1] >= 10 || tiro[1] < 0)
             continuar = 1;
-        }
         else{
             Verificar(i, tiro, pontuacao);
             getchar();
             getchar();
         }
-
         system("cls");
-
         i++;
     }
-    if(pontuacao[0] > pontuacao[1]){
+    if(pontuacao[0] > pontuacao[1])
         printf("%s, voce e o novo campeao de Batalha Naval\n", nome[0]);
-    }
-    else if(pontuacao[0] < pontuacao[1]){
+    else if(pontuacao[0] < pontuacao[1])
         printf("%s, voce e o novo campeao de Batalha Naval\n", nome[1]);
-    }
-    else{
+    else
         printf("O jogo deu empate!");
-    }
     return 0;
 }
