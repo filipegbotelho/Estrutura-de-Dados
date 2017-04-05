@@ -124,9 +124,8 @@ Verificar(int i,int tiro[], int pontuacao[]){
             printf("Errou!");
             campo[i][l][j] = '*';
         }
-        else{
+        else
             printf("Perdeu a vez. Tiro repitido!");
-        }
     }
     else{
         if (gabarito[i][l][j] == 'X' && campo[i][l][j] == '~'){
@@ -138,9 +137,8 @@ Verificar(int i,int tiro[], int pontuacao[]){
             printf("Errou!");
             campo[i][l][j] = '*';
         }
-        else{
+        else
             printf("Perdeu a vez. Tiro repitido!");
-        }
     }
 }
 int main(void){
