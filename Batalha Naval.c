@@ -1,17 +1,10 @@
 /*Universidade de Brasilia
-
 Instituto de Ciencias Exatas
-
 Departamento de Ciencia da Computacao
-
 Estrutura de Dados – 1/2017
-
 Aluno(a): Filipe Goncalves Botelho
-
 Matricula: 16/0120276
-
 Turma: B
-
 Descricao: Jogo da Batalha Naval. O qual consiste em acertar partes de embarcações
 do adversário por coordenadas do eixo cartesiano. Aquele que tiver mais pontos ao
 final do jogo, ganha. */
@@ -36,7 +29,6 @@ Gabarito(void){
         y =  rand() % 5;
         w =  rand() % 10;
         z =  rand() % 5;
-
         j = 0;
         while (j < 5 && tem == 0){
             if (gabarito[0][x][y+j] == 'X' && gabarito[1][w][z+j] == 'X')
@@ -66,7 +58,8 @@ Prejogo(char nome[][20]){
     printf("\t\t\t\t\t\t\t- X - Embarcacao atingida!\n\n");
     printf("\t\t\t\t\t\t\t- * - Embarcacao nao atingida!\n\n");
     printf("\t\t\t\t\t\t\t- 5 pontos por cada 'X' de embarcacao\n\n");
-    printf("\t\t\t\t\t\t\t- Ganha quem fizer mais pontos\n\n\n\n");
+    printf("\t\t\t\t\t\t\t- Ganha quem fizer mais pontos\n\n");
+    printf("\t\t\t\t\t\t\t- Digite um numero maior que 10 ou menor que 0 para SAIR do jogo\n\n\n\n");
     for (i = 0; i < 50; i++){
         printf("*  ");
     }
@@ -108,8 +101,8 @@ Layout(int pontuacao[],char nome[][20]){
         }
         printf("\n");
     }
-    printf("\n\n%s: %i pontos\t\t\t\t\t\t\t\t\t", nome[0], pontuacao[0]);
-    printf("%s: %i pontos\n", nome[1], pontuacao[1]);
+    printf("\n\n%s: %i pontos\t\t\t\t\t\t\t\t\t\t", nome[1], pontuacao[1]);
+    printf("%s: %i pontos\n", nome[0], pontuacao[0]);
 }
 
 Jogo(char nome[][20],int vez, int tiro[]){
@@ -132,25 +125,31 @@ Verificar(int i,int tiro[], int pontuacao[]){
     l = tiro[0];
     j = tiro[1];
     if (i == 0){
-        if (gabarito[i][l][j] == 'X'){
+        if (gabarito[i][l][j] == 'X' && campo[i][l][j] == '~'){
             printf("Acertou!");
             pontuacao[i] += 5;
             campo[i][l][j] = 'X';
         }
-        else{
+        else if(gabarito[i][l][j] == '~' && campo[i][l][j] == '~'){
             printf("Errou!");
             campo[i][l][j] = '*';
+        }
+        else{
+            printf("Perdeu a vez. Tiro repitido!");
         }
     }
     else{
-        if (gabarito[i][l][j] == 'X'){
+        if (gabarito[i][l][j] == 'X' && campo[i][l][j] == '~'){
             printf("Acertou!");
             pontuacao[i] += 5;
             campo[i][l][j] = 'X';
         }
-        else{
+        else if(gabarito[i][l][j] == '~' && campo[i][l][j] == '~'){
             printf("Errou!");
             campo[i][l][j] = '*';
+        }
+        else{
+            printf("Perdeu a vez. Tiro repitido!");
         }
     }
 
@@ -170,7 +169,7 @@ int main(void){
     while(continuar == 0){
         Layout(pontuacao, nome);
         Jogo(nome, i, tiro);
-        if (tiro[0] > 10 || tiro[0] < 0 || tiro[1] > 10 || tiro[1] < 0){
+        if (tiro[0] >= 10 || tiro[0] < 0 || tiro[1] >= 10 || tiro[1] < 0){
             continuar = 1;
         }
         else{
@@ -192,7 +191,5 @@ int main(void){
     else{
         printf("O jogo deu empate!");
     }
-
-
     return 0;
 }
